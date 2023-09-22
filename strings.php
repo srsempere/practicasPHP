@@ -11,7 +11,6 @@
     <?php
 
     require 'aux.php';
-    require 'funciones.php';
     $inputs = [];
     $results = [];
 
@@ -38,13 +37,13 @@
 
     // FUNCIÓN bin2hex
 
-    if ($addcslashes !== null) {
+    if ($addcslashes !== null && $addcslashes != '') {
         $results = [
             $addcslashes = addcslashes($addcslashes, 'AEIOUaeiou'),
         ];
     }
 
-    if ($bin2hex !== null) {
+    if ($bin2hex !== null && $bin2hex != '') {
         $results =[
             $bin2hex = bin2hex($bin2hex),
         ];
