@@ -13,7 +13,6 @@
     require 'aux.php';
     $inputs = [];
     $results = [];
-    $trozos_cplit = '';
 
     //FUNCIÓN addcslashes
 
@@ -39,6 +38,7 @@
         $chunk_split = isset($_POST['chunk_split']) ? $_POST['chunk_split'] : "",
         $trozos_cplit = isset($_POST['trozos_cplit']) ? $_POST['trozos_cplit'] : "",
         $sep_trozos_cplit = isset($_POST['sep_trozos_cplit']) ? $_POST['sep_trozos_cplit'] : "",
+        $count_chars = isset($_POST['count_chars']) ? $_POST['count_chars'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -70,6 +70,12 @@
     if ($chunk_split !== null && $chunk_split != '') {
         $results = [
             $chunk_split = chunk_split($chunk_split, $trozos_cplit, $sep_trozos_cplit),
+        ];
+    }
+
+    if ($count_chars !== null && $count_chars != '') {
+        $results = [
+            $count_chars = count_chars($count_chars, 3),
         ];
     }
 
@@ -142,8 +148,8 @@
         <?= dameresultado('buscaelemento', $chr, $results) ?>
     </p>
 
-     <!-- FUNCIÓN 5 -->
-     <h2>Función chunk_split</h2>
+    <!-- FUNCIÓN 5 -->
+    <h2>Función chunk_split</h2>
     <cite>Divide una cadena en trozos más pequeños</cite>
     <form action="" method="post">
         <br>
@@ -159,6 +165,21 @@
     <p>
         Resultado:
         <?= dameresultado('buscaelemento', $chunk_split, $results) ?>
+    </p>
+
+    <!-- FUNCIÓN 6 -->
+    <h2>Función count_chars</h2>
+    <cite>Se utiliza para obtener información sobre los caracteres utilizados en una cadena</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="count_chars" value="<?= isset($inputs['count_chars']) ? $inputs['count_chars'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $count_chars, $results) ?>
     </p>
 </body>
 
