@@ -33,9 +33,10 @@
     $inputs = [
         $addcslashes = isset($_POST['addcslashes']) ? $_POST['addcslashes'] : "",
         $bin2hex = isset($_POST['bin2hex']) ? $_POST['bin2hex'] : "",
+        $chop = isset($_POST['chop']) ? $_POST['chop'] : "",
     ];
 
-    // FUNCIÓN bin2hex
+    // APLICACIÓN DE FUNCIONES
 
     if ($addcslashes !== null && $addcslashes != '') {
         $results = [
@@ -44,8 +45,14 @@
     }
 
     if ($bin2hex !== null && $bin2hex != '') {
-        $results =[
+        $results = [
             $bin2hex = bin2hex($bin2hex),
+        ];
+    }
+
+    if ($chop !== null && $chop != '') {
+        $results = [
+            $chop = chop($chop),
         ];
     }
 
@@ -54,53 +61,56 @@
     <p> Aquí encontrarás implementaciones de todas las funciones de manejo de cadenas de caracteres disponibles en la documentación oficial de PHP. Desde operaciones básicas como concatenar y dividir cadenas, hasta funciones más avanzadas para comparar, buscar y reemplazar subcadenas.</p>
 
 
+    <!-- FUNCIÓN 1 -->
 
     <h2>Función addcslashes</h2>
     <cite>Pone un slash delante de las letras AEIOUaeiou</cite>
-    <p>
     <form action="" method="post">
         <label>Introduce tu cadena</label>
         <input type="text" name="addcslashes" value="<?= isset($inputs['addcslashes']) ? $inputs['addcslashes'] : "" ?>">
         <button type="submit">Crear</button>
         <button type="submit" name="borrar">Borrar</button>
     </form>
-    Resultado: <?php
-                $index = buscaelemento($addcslashes, $results);
-                if ($index !== false && array_key_exists($index, $results)) {
-                ?>
-        <?= $results[buscaelemento($addcslashes, $results)]; ?>
-    <?php
-                } else {
-    ?>
-        <?= "" ?>
-    <?php
-                };
-    ?>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $addcslashes, $results) ?>
+
     </p>
-
-
+    <!-- FUNCIÓN 2 -->
 
     <h2>Función bin2hex</h2>
     <cite>Devuelve una cadena ASCII que contiene la representación hexadecimal de str. La conversión se realiza byte a byte, con los 4 bits superiores primero.</cite>
-    form
+
     <form action="" method="post">
-        <label for="">Introduce tu cadena</label>
+        <br>
+        <label>Introduce tu cadena</label>
         <input type="text" name="bin2hex" value="<?= isset($inputs['bin2hex']) ? $inputs['bin2hex'] : "" ?>">
         <button type="submit">Crear</button>
         <button type="submit" name="borrar">Borrar</button>
     </form>
-    Resultado: <?php
-                $index = buscaelemento($bin2hex, $results);
-                if ($index !== false && array_key_exists($index, $results)) {
-                ?>
-        <?= $results[buscaelemento($bin2hex, $results)]; ?>
-    <?php
-                } else {
-    ?>
-        <?= "" ?>
-    <?php
-                };
-    ?>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $bin2hex, $results) ?>
+    </p>
+
+    <!-- FUNCIÓN 3 -->
+
+    <h2>Función chop</h2>
+    <cite>La función chop()en PHP elimina espacios en blanco (u otros caracteres especificados) del final de una cadena. Es un alias de la función rtrim().</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="chop" value="<?= isset($inputs['chop']) ? $inputs['chop'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $chop, $results) ?>
+    </p>
+
+    <!-- FUNCIÓN 4 -->
+
 </body>
 
 </html>
