@@ -31,9 +31,3 @@ return $array[$index];
 return "";
         }
 }
-
-// Función aplicafuncion
-
-/**
- *
- */

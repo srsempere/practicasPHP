@@ -34,6 +34,7 @@
         $addcslashes = isset($_POST['addcslashes']) ? $_POST['addcslashes'] : "",
         $bin2hex = isset($_POST['bin2hex']) ? $_POST['bin2hex'] : "",
         $chop = isset($_POST['chop']) ? $_POST['chop'] : "",
+        $chr = isset($_POST['chr']) ? $_POST['chr'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -53,6 +54,12 @@
     if ($chop !== null && $chop != '') {
         $results = [
             $chop = chop($chop),
+        ];
+    }
+
+    if ($chr !== null && $chr != '') {
+        $results = [
+            $chr = chr($chr),
         ];
     }
 
@@ -110,7 +117,19 @@
     </p>
 
     <!-- FUNCIÓN 4 -->
-
+    <h2>Función chr</h2>
+    <cite>Devuelve una cadena de un caracter que contiene el carácter especificado por ascii</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="chr" value="<?= isset($inputs['chr']) ? $inputs['chr'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $chr, $results) ?>
+    </p>
 </body>
 
 </html>
