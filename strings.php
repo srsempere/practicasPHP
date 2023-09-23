@@ -37,6 +37,8 @@
         $sep_trozos_cplit = isset($_POST['sep_trozos_cplit']) ? $_POST['sep_trozos_cplit'] : "",
         $count_chars = isset($_POST['count_chars']) ? $_POST['count_chars'] : "",
         $crypt = isset($_POST['crypt']) ? $_POST['crypt'] : "",
+        $explode = isset($_POST['explode']) ? $_POST['explode'] : "",
+        $del_explode = isset($_POST['del_explode']) ? $_POST['del_explode'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -82,6 +84,12 @@
         $salt = uniqid();
         $results = [
             $crypt = crypt($crypt, $salt),
+        ];
+    }
+
+    if ($explode !== null && $explode != '') {
+        $results = [
+            $explode = explode($del_explode, $explode),
         ];
     }
 
@@ -200,6 +208,24 @@
     <p>
         Resultado:
         <?= dameresultado('buscaelemento', $crypt, $results) ?>
+    </p>
+
+    <!-- FUNCIÓN 8 -->
+    <h2>Función explode</h2>
+    <cite>Se utiliza para dividir un string por un delimitador. La función devuelve un array de subcadenas, cada una de las cuales es una sección del string de entrada que está separada por el delimitador especificado.</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="explode" value="<?= isset($inputs['explode']) ? $inputs['explode'] : "" ?>">
+        <label>Introduce tu delimitador</label>
+        <input type="text" name="del_explode" value="<?= isset($inputs['del_explode']) ? $inputs['del_explode'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        ## TODO: Lo que devuelve explode es un array. Por tanto, para pintarlo creo que habría que recorrerlo.
+        Resultado:
+        <?= dameresultado('buscaelemento', $explode, $results) ?>
     </p>
 </body>
 
