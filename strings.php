@@ -24,9 +24,6 @@
         }
     }
 
-
-
-
     // Definición de variables
 
 
@@ -39,6 +36,7 @@
         $trozos_cplit = isset($_POST['trozos_cplit']) ? $_POST['trozos_cplit'] : "",
         $sep_trozos_cplit = isset($_POST['sep_trozos_cplit']) ? $_POST['sep_trozos_cplit'] : "",
         $count_chars = isset($_POST['count_chars']) ? $_POST['count_chars'] : "",
+        $crypt = isset($_POST['crypt']) ? $_POST['crypt'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -79,6 +77,13 @@
         ];
     }
 
+
+    if ($crypt !== null && $crypt != '') {
+        $salt = uniqid();
+        $results = [
+            $crypt = crypt($crypt, $salt),
+        ];
+    }
 
     ?>
     <h1>Bienvenido a la sección <strong>Cadenas</strong>!</h1>
@@ -180,6 +185,21 @@
     <p>
         Resultado:
         <?= dameresultado('buscaelemento', $count_chars, $results) ?>
+    </p>
+
+    <!-- FUNCIÓN 7 -->
+    <h2>Función crypt</h2>
+    <cite>crypt() devolverá el hash de un string utilizando el algoritmo estándar basado en DES de Unix o algoritmos alternativos que puedan estar disponibles en el sistema.</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="crypt" value="<?= isset($inputs['crypt']) ? $inputs['crypt'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $crypt, $results) ?>
     </p>
 </body>
 
