@@ -13,6 +13,7 @@
     require 'aux.php';
     $inputs = [];
     $results = [];
+    $trozos_cplit = '';
 
     //FUNCIÓN addcslashes
 
@@ -35,6 +36,9 @@
         $bin2hex = isset($_POST['bin2hex']) ? $_POST['bin2hex'] : "",
         $chop = isset($_POST['chop']) ? $_POST['chop'] : "",
         $chr = isset($_POST['chr']) ? $_POST['chr'] : "",
+        $chunk_split = isset($_POST['chunk_split']) ? $_POST['chunk_split'] : "",
+        $trozos_cplit = isset($_POST['trozos_cplit']) ? $_POST['trozos_cplit'] : "",
+        $sep_trozos_cplit = isset($_POST['sep_trozos_cplit']) ? $_POST['sep_trozos_cplit'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -62,6 +66,13 @@
             $chr = chr($chr),
         ];
     }
+
+    if ($chunk_split !== null && $chunk_split != '') {
+        $results = [
+            $chunk_split = chunk_split($chunk_split, $trozos_cplit, $sep_trozos_cplit),
+        ];
+    }
+
 
     ?>
     <h1>Bienvenido a la sección <strong>Cadenas</strong>!</h1>
@@ -129,6 +140,25 @@
     <p>
         Resultado:
         <?= dameresultado('buscaelemento', $chr, $results) ?>
+    </p>
+
+     <!-- FUNCIÓN 5 -->
+     <h2>Función chunk_split</h2>
+    <cite>Divide una cadena en trozos más pequeños</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="chunk_split" value="<?= isset($inputs['chunk_split']) ? $inputs['chunk_split'] : "" ?>">
+        <label>Introduce el número de trozos</label>
+        <input type="text" name="trozos_cplit" value="<?= isset($inputs['trozos_cplit']) ? $inputs['trozos_cplit'] : "" ?>">
+        <label>Introduce el separador para los trozos</label>
+        <input type="text" name="sep_trozos_cplit" value="<?= isset($inputs['sep_trozos_cplit']) ? $inputs['sep_trozos_cplit'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $chunk_split, $results) ?>
     </p>
 </body>
 
