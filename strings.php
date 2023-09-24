@@ -223,9 +223,15 @@
         <button type="submit" name="borrar">Borrar</button>
     </form>
     <p>
-        ## TODO: Lo que devuelve explode es un array. Por tanto, para pintarlo creo que habría que recorrerlo.
-        Resultado:
-        <?= dameresultado('buscaelemento', $explode, $results) ?>
+        <?php $res_explode = dameresultado('buscaelemento', $explode, $results); $cont = 0;?>
+        <p>
+            <!-- <?= var_dump($res_explode) ?> -->
+            <?php foreach($res_explode as $elemento): ?>
+                <?= $cont . "- " . $elemento . "<br>" ?>
+            <?php
+                $cont += 1;
+                endforeach; ?>
+        </p>
     </p>
 </body>
 
