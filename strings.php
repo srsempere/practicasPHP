@@ -233,6 +233,25 @@
                 endforeach; ?>
         </p>
     </p>
+
+     <!-- FUNCIÓN 9 -->
+     <h2>Función fprintf</h2>
+    <cite>La función fprintf() en PHP se utiliza para escribir datos formateados en un archivo o stream de archivo. Esta función toma como primer argumento un recurso de archivo (obtenido, por ejemplo, mediante fopen()), seguido de una cadena de formato que especifica cómo se deben presentar los datos, y luego los datos a formatear. Los datos formateados se escribirán en el archivo especificado en lugar de imprimirse en la salida estándar. La función es útil para la creación o manipulación de archivos con contenido estructurado o personalizado.</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce tu cadena</label>
+        <input type="text" name="fprintf" value="<?= isset($inputs['fprintf']) ? $inputs['fprintf'] : "" ?>">
+        <label>Introduce el tipo de datos que vas a tratar.</label>
+        <input type="radio" name="op_fprintf" value="nombreedad">
+        <input type="radio" name="op_fprintf" value="fecha">
+        <input type="radio" name="op_fprintf" value="dinero">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $fprintf, $results) ?>
+    </p>
 </body>
 
 </html>
