@@ -23,7 +23,7 @@ function buscaelemento($elem, $array)
  * Busca un elemento dentro del array resultado y lo devuelve.
  */
 
-function dameresultado(callable $funcion,string $elemento,array $array) {
+function dameresultado(callable $funcion, $elemento, $array): array | string {
     $index = $funcion($elemento, $array);
     if ($index !== false && array_key_exists($index, $array)) {
 return $array[$index];
@@ -32,25 +32,40 @@ return "";
         }
 }
 
-// TODO: Implementar en string.php y aquí. En la llamada a la función se le debe de pasar un array con todos los elementos.
-/**
- * Recibirá un array.
- * El primer elemento del array va a ser la opción del case y los demás elementos serán los adecuados para cada opción.
- * Dependiente de la opción elegida en la llamada a la función, se le pasará un elemento u otro como segundos argumentos.
- */
-function eligeopcion(array $arrayelem) {
-   switch ($arrayelem[0]) {
+function eligeopcion( $op_fprintf) {
+   switch ($op_fprintf) {
     case 'nombreedad':
-        #
-        break;
+        return
+            <<<EOT
+            <form action="" method="post">
+                <label>Introduce el nombre:</label>
+                <input type="text" name="nombre_fprintf">
+                <label>Introduce la edad:</label>
+                <input type="text" name="edad_fprintf">
+                <button type="submit">Enviar</button>
+            </form>
+            EOT;
     case 'fecha':
-        # code...
+            return
+            <<<EOT
+            <form action="" method="post">
+                <label>Introduce el año:</label>
+                <input type="text" name="anyo_fprintf">
+                <label>Introduce el mes:</label>
+                <input type="text" name="mes_fprintf">
+                <label>Introduce el dia:</label>
+                <input type="text" name="dia_fprintf">
+                <button type="submit">Enviar</button>
+            </form>
+            EOT;
         break;
     case 'dinero':
-        # code...
-        break;
-    default:
-        return 'No has elegido ninguna opción.';
-        break;
+        return
+        <<<EOT
+        <form action="" method="post">
+            <label>Introduce la cantidad monetaria:</label>
+            <input type="text" name="dinero_fprintf">
+        </form>
+        EOT;
    }
 }

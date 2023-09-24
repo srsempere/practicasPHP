@@ -39,6 +39,9 @@
         $crypt = isset($_POST['crypt']) ? $_POST['crypt'] : "",
         $explode = isset($_POST['explode']) ? $_POST['explode'] : "",
         $del_explode = isset($_POST['del_explode']) ? $_POST['del_explode'] : "",
+        $op_fprintf = isset($_POST['op_fprintf']) ? $_POST['op_fprintf'] : "",
+        $nombre_fprintf = isset($_POST['nombre_fprintf']) ? $_POST['nombre_fprintf'] : "",
+        $edad_fprintf = isset($_POST['edad_fprintf']) ? $_POST['edad_fprintf'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -91,6 +94,22 @@
         $results = [
             $explode = explode($del_explode, $explode),
         ];
+    }
+
+    if ($nombre_fprintf !== null && $nombre_fprintf != '') {
+        $file = fopen("resultado.txt", 'w');
+
+        if (!$file) {
+            echo "No se pudo abrir el archivo";
+            exit;
+        }
+
+        $results = [
+            $nombre_fprintf = fprintf($file, "Nombre: %s\n",$nombre_fprintf),
+            $nombre_fprintf = fprintf($file, "Edad: %d\n",$edad_fprintf),
+        ];
+
+        fclose($file);
     }
 
     ?>
@@ -223,35 +242,55 @@
         <button type="submit" name="borrar">Borrar</button>
     </form>
     <p>
-        <?php $res_explode = dameresultado('buscaelemento', $explode, $results); $cont = 0;?>
-        <p>
-            <!-- <?= var_dump($res_explode) ?> -->
-            <?php foreach($res_explode as $elemento): ?>
-                <?= $cont . "- " . $elemento . "<br>" ?>
-            <?php
+
+        <?php $res_explode = dameresultado('buscaelemento', $explode, $results); ?>
+        <?php
+
+        if (is_array($explode)) {
+
+            $cont = 0;
+
+            foreach ($res_explode as $elemento) {
+                echo $cont . "- " . $elemento . "<br>";
                 $cont += 1;
-                endforeach; ?>
-        </p>
+            }
+        } else {
+            echo "No entro dentro.";
+        }
+        ?>
     </p>
 
-     <!-- FUNCIÓN 9 -->
-     <h2>Función fprintf</h2>
+    <!-- FUNCIÓN 9 -->
+    <h2>Función fprintf</h2>
     <cite>La función fprintf() en PHP se utiliza para escribir datos formateados en un archivo o stream de archivo. Esta función toma como primer argumento un recurso de archivo (obtenido, por ejemplo, mediante fopen()), seguido de una cadena de formato que especifica cómo se deben presentar los datos, y luego los datos a formatear. Los datos formateados se escribirán en el archivo especificado en lugar de imprimirse en la salida estándar. La función es útil para la creación o manipulación de archivos con contenido estructurado o personalizado.</cite>
     <form action="" method="post">
         <br>
         <label>Introduce tu cadena</label>
         <input type="text" name="fprintf" value="<?= isset($inputs['fprintf']) ? $inputs['fprintf'] : "" ?>">
         <label>Introduce el tipo de datos que vas a tratar.</label>
+        <br>
+        <br>
+        <label>Nombre y edad</label>
         <input type="radio" name="op_fprintf" value="nombreedad">
+        <label>Fecha</label>
         <input type="radio" name="op_fprintf" value="fecha">
+        <label>Dinero</label>
         <input type="radio" name="op_fprintf" value="dinero">
         <button type="submit">Crear</button>
         <button type="submit" name="borrar">Borrar</button>
     </form>
-    <p>
-        Resultado:
-        <?= dameresultado('buscaelemento', $fprintf, $results) ?>
-    </p>
+    <br>
+    <br>
+    <?php
+    if (isset($op_fprintf) && $op_fprintf == 'nombreedad') {
+        echo eligeopcion($op_fprintf);
+    } elseif (isset($op_fprintf) && $op_fprintf == 'fecha') {
+        echo eligeopcion($op_fprintf);
+    } elseif (isset($op_fprintf) && $op_fprintf == 'dinero') {
+        echo eligeopcion($op_fprintf);
+    }
+    ?>
+
 </body>
 
 </html>
