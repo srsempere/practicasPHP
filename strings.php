@@ -46,48 +46,49 @@
         $mes_fprintf = isset($_POST['mes_fprintf']) ? $_POST['mes_fprintf'] : "",
         $dia_fprintf = isset($_POST['dia_fprintf']) ? $_POST['dia_fprintf'] : "",
         $dinero_fprintf = isset($_POST['dinero_fprintf']) ? $_POST['dinero_fprintf'] : "",
+        $html_entity_decode = isset($_POST['html_entity_decode']) ? $_POST['html_entity_decode'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
 
-    if ($addcslashes !== null && $addcslashes != '') {
+    if (validasi($addcslashes)) {
         $results = [
             $addcslashes = addcslashes($addcslashes, 'AEIOUaeiou'),
         ];
     }
 
-    if ($bin2hex !== null && $bin2hex != '') {
+    if (validasi($bin2hex)) {
         $results = [
             $bin2hex = bin2hex($bin2hex),
         ];
     }
 
-    if ($chop !== null && $chop != '') {
+    if (validasi($chop)) {
         $results = [
             $chop = chop($chop),
         ];
     }
 
-    if ($chr !== null && $chr != '') {
+    if (validasi($chr)) {
         $results = [
             $chr = chr($chr),
         ];
     }
 
-    if ($chunk_split !== null && $chunk_split != '') {
+    if (validasi($chunk_split)) {
         $results = [
             $chunk_split = chunk_split($chunk_split, $trozos_cplit, $sep_trozos_cplit),
         ];
     }
 
-    if ($count_chars !== null && $count_chars != '') {
+    if (validasi($count_chars)) {
         $results = [
             $count_chars = count_chars($count_chars, 3),
         ];
     }
 
 
-    if ($crypt !== null && $crypt != '') {
+    if (validasi($crypt)) {
         $salt = uniqid();
         $results = [
             $crypt = crypt($crypt, $salt),
@@ -152,6 +153,13 @@
         exit();
         }
 
+    if (validasi($html_entity_decode)) {
+
+        $results = [
+            $html_entity_decode = html_entity_decode($html_entity_decode, ENT_HTML5),
+        ];
+
+        }
 
     ?>
     <h1>Bienvenido a la sección <strong>Cadenas</strong>!</h1>
@@ -295,8 +303,6 @@
                 echo $cont . "- " . $elemento . "<br>";
                 $cont += 1;
             }
-        } else {
-            echo "No entro dentro.";
         }
         ?>
     </p>
@@ -331,6 +337,21 @@
         echo eligeopcion($op_fprintf);
     }
     ?>
+
+      <!-- FUNCIÓN 10 -->
+      <h2>Función html_entity_decode</h2>
+    <cite>se utiliza para convertir todas las entidades HTML a sus respectivos caracteres.</cite>
+    <form action="" method="post">
+        <br>
+        <label>Introduce el código que quieres convertir a código HTML5</label>
+        <input type="text" name="html_entity_decode" value="<?= isset($inputs['html_entity_decode']) ? $inputs['html_entity_decode'] : "" ?>">
+        <button type="submit">Crear</button>
+        <button type="submit" name="borrar">Borrar</button>
+    </form>
+    <p>
+        Resultado:
+        <?= dameresultado('buscaelemento', $html_entity_decode, $results) ?>
+    </p>
 
 </body>
 
