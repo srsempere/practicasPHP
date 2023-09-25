@@ -1,6 +1,6 @@
 <?php
 
-$tipo_datos_elegido = isset($_POST['tipo_datos']) ? $_POST['tipo_datos'] : "";
+$tipo_datos_elegido = isset($_GET['tipo_datos']) ? $_GET['tipo_datos'] : "";
 
 var_dump($tipo_datos_elegido);
 

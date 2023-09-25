@@ -11,7 +11,7 @@
     <h1>Bienvenido</h1>
     <p>A continuación se muestran las distintas categorías con las que puedes trabajar:</p>
     <fieldset>
-        <form action="quehacer.php" method="post">
+        <form action="quehacer.php" method="get">
             <legend>Selecciona tu opción:</legend>
             <br>
             <label for="strings"><input type="radio" name="tipo_datos" value="strings">Trabajar con cadenas.</label>
