@@ -45,6 +45,7 @@
         $anyo_fprintf = isset($_POST['anyo_fprintf']) ? $_POST['anyo_fprintf'] : "",
         $mes_fprintf = isset($_POST['mes_fprintf']) ? $_POST['mes_fprintf'] : "",
         $dia_fprintf = isset($_POST['dia_fprintf']) ? $_POST['dia_fprintf'] : "",
+        $dinero_fprintf = isset($_POST['dinero_fprintf']) ? $_POST['dinero_fprintf'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -126,7 +127,24 @@
         }
 
         $results = [
-            $nombre_fprintf = fprintf($file, ": %02d-%02d-%04d", $dia_fprintf, $mes_fprintf, $anyo_fprintf),
+            $fecha_fprintf = fprintf($file, ": %02d-%02d-%04d", $dia_fprintf, $mes_fprintf, $anyo_fprintf),
+        ];
+
+        fclose($file);
+        header("Location: exito.php", true, 307);
+        exit();
+        }
+
+    if (validasi($dinero_fprintf)) {
+        $file = fopen("resultado.txt", 'w');
+
+        if (!$file) {
+            echo "No se pudo abrir el archivo";
+            exit;
+        }
+
+        $results = [
+            $dinero_fprintf = fprintf($file, ": %01.2f", $dinero_fprintf),
         ];
 
         fclose($file);

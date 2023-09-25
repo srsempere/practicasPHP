@@ -65,6 +65,7 @@ function eligeopcion( $op_fprintf) {
         <form action="" method="post">
             <label>Introduce la cantidad monetaria:</label>
             <input type="text" name="dinero_fprintf">
+            <button type="submit">Enviar</button>
         </form>
         EOT;
    }
