@@ -42,6 +42,9 @@
         $op_fprintf = isset($_POST['op_fprintf']) ? $_POST['op_fprintf'] : "",
         $nombre_fprintf = isset($_POST['nombre_fprintf']) ? $_POST['nombre_fprintf'] : "",
         $edad_fprintf = isset($_POST['edad_fprintf']) ? $_POST['edad_fprintf'] : "",
+        $anyo_fprintf = isset($_POST['anyo_fprintf']) ? $_POST['anyo_fprintf'] : "",
+        $mes_fprintf = isset($_POST['mes_fprintf']) ? $_POST['mes_fprintf'] : "",
+        $dia_fprintf = isset($_POST['dia_fprintf']) ? $_POST['dia_fprintf'] : "",
     ];
 
     // APLICACIÓN DE FUNCIONES
@@ -96,7 +99,7 @@
         ];
     }
 
-    if ($nombre_fprintf !== null && $nombre_fprintf != '') {
+    if (validasi($nombre_fprintf) && validasi($edad_fprintf)) {
         $file = fopen("resultado.txt", 'w');
 
         if (!$file) {
@@ -106,11 +109,31 @@
 
         $results = [
             $nombre_fprintf = fprintf($file, "Nombre: %s\n",$nombre_fprintf),
-            $nombre_fprintf = fprintf($file, "Edad: %d\n",$edad_fprintf),
+            $edad_fprintf = fprintf($file, "Edad: %d\n",$edad_fprintf),
         ];
 
         fclose($file);
-    }
+        header("Location: exito.php", true, 307);
+        exit();
+        }
+
+    if ((validasi($anyo_fprintf) && validasi($mes_fprintf) && validasi($dia_fprintf))) {
+        $file = fopen("resultado.txt", 'w');
+
+        if (!$file) {
+            echo "No se pudo abrir el archivo";
+            exit;
+        }
+
+        $results = [
+            $nombre_fprintf = fprintf($file, ": %02d-%02d-%04d", $dia_fprintf, $mes_fprintf, $anyo_fprintf),
+        ];
+
+        fclose($file);
+        header("Location: exito.php", true, 307);
+        exit();
+        }
+
 
     ?>
     <h1>Bienvenido a la sección <strong>Cadenas</strong>!</h1>

@@ -69,3 +69,14 @@ function eligeopcion( $op_fprintf) {
         EOT;
    }
 }
+
+// Función valida
+
+function validasi($string) {
+    if ($string !== null && $string != '') {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
